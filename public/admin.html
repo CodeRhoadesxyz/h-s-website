@@ -25,6 +25,14 @@
           <span class="nav-icon">🦜</span>
           <span class="nav-text">Adoptable Birds</span>
         </a>
+        <a href="#surrender" class="nav-link" data-tab="surrender">
+          <span class="nav-icon">📋</span>
+          <span class="nav-text">Surrenders</span>
+        </a>
+        <a href="#adoptions" class="nav-link" data-tab="adoptions">
+          <span class="nav-icon">❤️</span>
+          <span class="nav-text">Adoptions</span>
+        </a>
         <a href="#events" class="nav-link" data-tab="events">
           <span class="nav-icon">📅</span>
           <span class="nav-text">Events</span>
@@ -33,6 +41,10 @@
           <span class="nav-icon">💬</span>
           <span class="nav-text">Messages</span>
         </a>
+        <a href="#users" class="nav-link" data-tab="users">
+          <span class="nav-icon">👥</span>
+          <span class="nav-text">Admin Users</span>
+        </a>
         <a href="index.html" class="nav-link back-link">
           <span class="nav-icon">← </span>
           <span class="nav-text">Back to Site</span>
@@ -40,6 +52,8 @@
       </nav>
 
       <div class="sidebar-footer">
+        <p id="currentUser">User</p>
+        <button class="btn btn-logout" id="logoutBtn">Logout</button>
         <p>v1.0.0</p>
       </div>
     </aside>
@@ -206,6 +220,20 @@
           </div>
         </section>
 
+        <!-- Surrender Applications Tab -->
+        <section id="surrender" class="tab-content">
+          <div id="surrenderList" class="items-list">
+            <p class="loading">Loading surrender applications...</p>
+          </div>
+        </section>
+
+        <!-- Adoption Applications Tab -->
+        <section id="adoptions" class="tab-content">
+          <div id="adoptionsList" class="items-list">
+            <p class="loading">Loading adoption applications...</p>
+          </div>
+        </section>
+
         <!-- Messages Tab -->
         <section id="messages" class="tab-content">
           <div class="section-header">
@@ -216,6 +244,13 @@
           <!-- Messages List -->
           <div id="messagesList" class="items-list">
             <p class="loading">Loading messages...</p>
+          </div>
+        </section>
+
+        <!-- Admin Users Tab -->
+        <section id="users" class="tab-content">
+          <div id="usersList" class="items-list">
+            <p class="loading">Loading admin users...</p>
           </div>
         </section>
       </div>
@@ -235,6 +270,6 @@
     </div>
   </div>
 
-  <script src="js/admin.js"></script>
+  <script src="js/admin-enhanced.js"></script>
 </body>
 </html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart & Soul Parrot Rescue - Surrender Application</title>
+  <link rel="stylesheet" href="css/styles.css?v=2.0">
+  <style>
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.25rem;
+      background-color: var(--input-bg, var(--card));
+      color: var(--foreground);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(107, 155, 106, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .form-section h3 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-dark, #5a9a59);
+    }
+
+    .btn-submit:disabled {
+      background-color: var(--muted-foreground);
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      background-color: rgba(107, 155, 106, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .error-message {
+      background-color: rgba(220, 38, 38, 0.1);
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+      color: #dc2626;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .required {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <div class="logo-image">
+            <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+          </div>
+          <span class="logo-text">Heart & Soul Parrot Rescue</span>
+        </a>
+
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="adoptable.html">Adoptable</a>
+          <a href="team.html">Team</a>
+          <a href="events.html">Events</a>
+          <a href="prices.html">Pricing</a>
+          <a href="surrender.html">Surrender</a>
+          <a href="vets.html">Vets</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+            <span class="theme-icon"></span>
+          </button>
+          <a href="donate.html" class="donate-btn">Donate</a>
+        </div>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <button class="mobile-theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon"></span>
+      </button>
+      <button class="mobile-menu-close" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="adoptable.html">Adoptable</a>
+      <a href="team.html">Team</a>
+      <a href="events.html">Events</a>
+      <a href="prices.html">Pricing</a>
+      <a href="surrender.html">Surrender</a>
+      <a href="vets.html">Vets</a>
+    </nav>
+    <div class="mobile-menu-divider"></div>
+    <a href="donate.html" class="mobile-donate-btn">Donate Now</a>
+  </div>
+  <div class="mobile-menu-overlay"></div>
+
+  <main>
+    <!-- HEADER SECTION -->
+    <section style="background-color: rgba(107, 155, 106, 0.05); padding: 4rem 0 6rem;">
+      <div class="container" style="text-align: center; max-width: 56rem;">
+        <h1 class="page-title">Surrender Application</h1>
+        <p class="page-subtitle">Please fill out this form with as much detail as possible to help us understand your parrot's needs and find the best placement.</p>
+      </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section style="padding: 4rem 0;">
+      <div class="container">
+        <div style="max-width: 56rem; margin: 0 auto;">
+          <div class="card" style="padding: 2rem;">
+            <div id="successMessage" class="success-message">
+              <strong>Success!</strong> Your surrender application has been submitted. We will contact you shortly.
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="surrenderForm">
+              <!-- OWNER INFORMATION -->
+              <div class="form-section">
+                <h3>Your Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="ownerName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="ownerName" name="ownerName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="ownerEmail">Email Address <span class="required">*</span></label>
+                    <input type="email" id="ownerEmail" name="ownerEmail" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="ownerPhone">Phone Number</label>
+                  <input type="tel" id="ownerPhone" name="ownerPhone">
+                </div>
+              </div>
+
+              <!-- BIRD INFORMATION -->
+              <div class="form-section">
+                <h3>Bird Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="birdName">Bird's Name <span class="required">*</span></label>
+                    <input type="text" id="birdName" name="birdName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="birdSpecies">Species <span class="required">*</span></label>
+                    <input type="text" id="birdSpecies" name="birdSpecies" placeholder="e.g., Blue and Gold Macaw" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="birdAge">Age</label>
+                    <input type="text" id="birdAge" name="birdAge" placeholder="e.g., 5 years">
+                  </div>
+                  <div class="form-group">
+                    <label for="healthStatus">Health Status</label>
+                    <input type="text" id="healthStatus" name="healthStatus" placeholder="e.g., Good, Excellent, Needs care">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="birdDescription">Physical Description</label>
+                  <textarea id="birdDescription" name="birdDescription" placeholder="Describe the bird's appearance, coloring, size, etc."></textarea>
+                </div>
+              </div>
+
+              <!-- SURRENDER REASON -->
+              <div class="form-section">
+                <h3>Reason for Surrender</h3>
+                
+                <div class="form-group">
+                  <label for="reasonForSurrender">Why are you surrendering the bird? <span class="required">*</span></label>
+                  <textarea id="reasonForSurrender" name="reasonForSurrender" required placeholder="Please explain your situation..."></textarea>
+                </div>
+              </div>
+
+              <!-- BEHAVIORAL & MEDICAL INFORMATION -->
+              <div class="form-section">
+                <h3>Behavioral & Medical Information</h3>
+                
+                <div class="form-group">
+                  <label for="behavioralNotes">Behavioral Notes</label>
+                  <textarea id="behavioralNotes" name="behavioralNotes" placeholder="Any behavioral traits, temperament, aggression, shyness, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="medicalHistory">Medical History</label>
+                  <textarea id="medicalHistory" name="medicalHistory" placeholder="Any health issues, past injuries, medications, veterinary care, etc."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="dietaryPreferences">Dietary Preferences & Restrictions</label>
+                  <textarea id="dietaryPreferences" name="dietaryPreferences" placeholder="Favorite foods, foods to avoid, allergies, etc."></textarea>
+                </div>
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <div style="text-align: center; margin-top: 2rem;">
+                <button type="submit" class="btn-submit">Submit Application</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <div class="footer-logo-image">
+              <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+            </div>
+            <span class="footer-logo-text">Heart & Soul</span>
+          </div>
+          <p class="footer-description">
+            Sherry, Jerry, and our volunteers put their whole heart and soul into the Parrot rescue. We want you to feel part of our family. We are here for the birds.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/p/Heart-and-Soul-Parrot-Rescue-100082180182198/" target="_blank" rel="noopener noreferrer" class="footer-social-link facebook" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/heartandsoulparrotrescue/" target="_blank" rel="noopener noreferrer" class="footer-social-link instagram" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="adoptable.html">Adoptable Birds</a>
+            <a href="events.html">Events</a>
+            <a href="team.html">Our Team</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <div class="footer-links">
+            <a href="vets.html">Veterinary Partners</a>
+            <a href="prices.html">Services & Pricing</a>
+            <a href="surrender.html">Surrender a Bird</a>
+            <a href="donate.html">Donate</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <div class="footer-links">
+            <a href="mailto:heartandsoulparrots@gmail.com">heartandsoulparrots@gmail.com</a>
+            <a href="tel:412-748-1288">412-748-1288</a>
+            <a href="surrender.html">Surrender a Bird</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Heart and Soul Parrot Rescue.</p>
+        <div class="footer-heart">
+          <span>Made with</span>
+          <span class="heart-icon">❤</span>
+          <span>by</span>
+          <a href="https://www.facebook.com/dalton.rhoades/">Dalton</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const form = document.getElementById('surrenderForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Hide messages
+      successMessage.classList.remove('show');
+      errorMessage.classList.remove('show');
+
+      const formData = {
+        owner_name: document.getElementById('ownerName').value,
+        owner_email: document.getElementById('ownerEmail').value,
+        owner_phone: document.getElementById('ownerPhone').value,
+        bird_name: document.getElementById('birdName').value,
+        bird_species: document.getElementById('birdSpecies').value,
+        bird_age: document.getElementById('birdAge').value,
+        bird_description: document.getElementById('birdDescription').value,
+        reason_for_surrender: document.getElementById('reasonForSurrender').value,
+        bird_health_status: document.getElementById('healthStatus').value,
+        behavioral_notes: document.getElementById('behavioralNotes').value,
+        medical_history: document.getElementById('medicalHistory').value,
+        dietary_preferences: document.getElementById('dietaryPreferences').value
+      };
+
+      try {
+        const response = await fetch('/api/surrender-applications', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to submit application');
+        }
+
+        const result = await response.json();
+        successMessage.classList.add('show');
+        form.reset();
+
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/surrender.html';
+        }, 2000);
+      } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

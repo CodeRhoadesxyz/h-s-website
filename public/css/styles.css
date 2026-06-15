@@ -1422,65 +1422,7 @@ tbody tr:hover {
 .text-secondary { color: var(--secondary); }
 
 
-/* ============================================================================
-   PARROT ANIMATION
-   ============================================================================ */
 
-.parrot-animation-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 5;
-  overflow: hidden;
-}
-
-.flying-parrot {
-  position: absolute;
-  width: 150px;
-  height: auto;
-  opacity: 0.8;
-  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
-  will-change: transform;
-}
-
-@keyframes flyAcross {
-  0% {
-    transform: translate(-200px, 0) rotate(5deg);
-  }
-  25% {
-    transform: translate(25vw, 10vh) rotate(-5deg);
-  }
-  50% {
-    transform: translate(50vw, -5vh) rotate(5deg);
-  }
-  75% {
-    transform: translate(75vw, 15vh) rotate(-5deg);
-  }
-  100% {
-    transform: translate(110vw, 0) rotate(5deg);
-  }
-}
-
-@keyframes flyBack {
-  0% {
-    transform: translate(110vw, 0) scaleX(-1) rotate(5deg);
-  }
-  25% {
-    transform: translate(75vw, 10vh) scaleX(-1) rotate(-5deg);
-  }
-  50% {
-    transform: translate(50vw, -5vh) scaleX(-1) rotate(5deg);
-  }
-  75% {
-    transform: translate(25vw, 15vh) scaleX(-1) rotate(-5deg);
-  }
-  100% {
-    transform: translate(-200px, 0) scaleX(-1) rotate(5deg);
-  }
-}
 
 /* ============================================================================
    THEME TOGGLE BUTTON

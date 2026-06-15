@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart & Soul Parrot Rescue - Adoption Application</title>
+  <link rel="stylesheet" href="css/styles.css?v=2.0">
+  <style>
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--foreground);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.25rem;
+      background-color: var(--input-bg, var(--card));
+      color: var(--foreground);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(107, 155, 106, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .form-section:last-child {
+      border-bottom: none;
+    }
+
+    .form-section h3 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .btn-submit {
+      background-color: var(--primary);
+      color: white;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--primary-dark, #5a9a59);
+    }
+
+    .btn-submit:disabled {
+      background-color: var(--muted-foreground);
+      cursor: not-allowed;
+    }
+
+    .success-message {
+      background-color: rgba(107, 155, 106, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .error-message {
+      background-color: rgba(220, 38, 38, 0.1);
+      border-left: 4px solid #dc2626;
+      padding: 1rem;
+      border-radius: 0.25rem;
+      margin-bottom: 1.5rem;
+      color: #dc2626;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    .required {
+      color: #dc2626;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <div class="logo-image">
+            <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+          </div>
+          <span class="logo-text">Heart & Soul Parrot Rescue</span>
+        </a>
+
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="adoptable.html">Adoptable</a>
+          <a href="team.html">Team</a>
+          <a href="events.html">Events</a>
+          <a href="prices.html">Pricing</a>
+          <a href="surrender.html">Surrender</a>
+          <a href="vets.html">Vets</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+            <span class="theme-icon"></span>
+          </button>
+          <a href="donate.html" class="donate-btn">Donate</a>
+        </div>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu">
+    <div class="mobile-menu-header">
+      <button class="mobile-theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon"></span>
+      </button>
+      <button class="mobile-menu-close" aria-label="Close menu">×</button>
+    </div>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="adoptable.html">Adoptable</a>
+      <a href="team.html">Team</a>
+      <a href="events.html">Events</a>
+      <a href="prices.html">Pricing</a>
+      <a href="surrender.html">Surrender</a>
+      <a href="vets.html">Vets</a>
+    </nav>
+    <div class="mobile-menu-divider"></div>
+    <a href="donate.html" class="mobile-donate-btn">Donate Now</a>
+  </div>
+  <div class="mobile-menu-overlay"></div>
+
+  <main>
+    <!-- HEADER SECTION -->
+    <section style="background-color: rgba(107, 155, 106, 0.05); padding: 4rem 0 6rem;">
+      <div class="container" style="text-align: center; max-width: 56rem;">
+        <h1 class="page-title">Adoption Application</h1>
+        <p class="page-subtitle">Thank you for your interest in adopting! Please fill out this application so we can learn more about you and find the perfect match.</p>
+      </div>
+    </section>
+
+    <!-- FORM SECTION -->
+    <section style="padding: 4rem 0;">
+      <div class="container">
+        <div style="max-width: 56rem; margin: 0 auto;">
+          <div class="card" style="padding: 2rem;">
+            <div id="successMessage" class="success-message">
+              <strong>Success!</strong> Your adoption application has been submitted. We will review it and contact you soon.
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+
+            <form id="adoptionForm">
+              <!-- APPLICANT INFORMATION -->
+              <div class="form-section">
+                <h3>Your Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="applicantName">Full Name <span class="required">*</span></label>
+                    <input type="text" id="applicantName" name="applicantName" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="applicantEmail">Email Address <span class="required">*</span></label>
+                    <input type="email" id="applicantEmail" name="applicantEmail" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="applicantPhone">Phone Number</label>
+                    <input type="tel" id="applicantPhone" name="applicantPhone">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="applicantAddress">Street Address</label>
+                  <input type="text" id="applicantAddress" name="applicantAddress">
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="applicantCity">City</label>
+                    <input type="text" id="applicantCity" name="applicantCity">
+                  </div>
+                  <div class="form-group">
+                    <label for="applicantState">State</label>
+                    <input type="text" id="applicantState" name="applicantState">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="applicantZip">ZIP Code</label>
+                  <input type="text" id="applicantZip" name="applicantZip">
+                </div>
+              </div>
+
+              <!-- BIRD SELECTION -->
+              <div class="form-section">
+                <h3>Bird Information</h3>
+                
+                <div class="form-group">
+                  <label for="birdName">Bird Name <span class="required">*</span></label>
+                  <input type="text" id="birdName" name="birdName" placeholder="Which bird are you interested in?" required>
+                </div>
+              </div>
+
+              <!-- HOUSEHOLD INFORMATION -->
+              <div class="form-section">
+                <h3>Household Information</h3>
+                
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="householdMembers">Number of Household Members</label>
+                    <input type="number" id="householdMembers" name="householdMembers" min="1">
+                  </div>
+                  <div class="form-group">
+                    <label for="livingStatus">Living Situation <span class="required">*</span></label>
+                    <select id="livingStatus" name="livingStatus" required>
+                      <option value="">Select...</option>
+                      <option value="house">House</option>
+                      <option value="apartment">Apartment</option>
+                      <option value="condo">Condo</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="otherPets">Other Pets in Home</label>
+                  <textarea id="otherPets" name="otherPets" placeholder="List any other pets (dogs, cats, birds, etc.) and their temperament..."></textarea>
+                </div>
+              </div>
+
+              <!-- EXPERIENCE & COMMITMENT -->
+              <div class="form-section">
+                <h3>Experience & Commitment</h3>
+                
+                <div class="form-group">
+                  <label for="experienceLevel">Parrot Ownership Experience <span class="required">*</span></label>
+                  <select id="experienceLevel" name="experienceLevel" required>
+                    <option value="">Select...</option>
+                    <option value="first-time">First-time parrot owner</option>
+                    <option value="some-experience">Some experience with parrots</option>
+                    <option value="experienced">Experienced parrot owner</option>
+                    <option value="very-experienced">Very experienced</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="whyAdopt">Why do you want to adopt a parrot? <span class="required">*</span></label>
+                  <textarea id="whyAdopt" name="whyAdopt" required placeholder="Tell us about your motivation for adoption..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="commitmentLevel">How long do you plan to care for this bird?</label>
+                  <textarea id="commitmentLevel" name="commitmentLevel" placeholder="Parrots can live 20-80+ years. Describe your commitment..."></textarea>
+                </div>
+              </div>
+
+              <!-- SUBMIT BUTTON -->
+              <div style="text-align: center; margin-top: 2rem;">
+                <button type="submit" class="btn-submit">Submit Application</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <div class="footer-logo-image">
+              <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+            </div>
+            <span class="footer-logo-text">Heart & Soul</span>
+          </div>
+          <p class="footer-description">
+            Sherry, Jerry, and our volunteers put their whole heart and soul into the Parrot rescue. We want you to feel part of our family. We are here for the birds.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/p/Heart-and-Soul-Parrot-Rescue-100082180182198/" target="_blank" rel="noopener noreferrer" class="footer-social-link facebook" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/heartandsoulparrotrescue/" target="_blank" rel="noopener noreferrer" class="footer-social-link instagram" aria-label="Instagram">📷</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="adoptable.html">Adoptable Birds</a>
+            <a href="events.html">Events</a>
+            <a href="team.html">Our Team</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <div class="footer-links">
+            <a href="vets.html">Veterinary Partners</a>
+            <a href="prices.html">Services & Pricing</a>
+            <a href="surrender.html">Surrender a Bird</a>
+            <a href="donate.html">Donate</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <div class="footer-links">
+            <a href="mailto:heartandsoulparrots@gmail.com">heartandsoulparrots@gmail.com</a>
+            <a href="tel:412-748-1288">412-748-1288</a>
+            <a href="surrender.html">Surrender a Bird</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Heart and Soul Parrot Rescue.</p>
+        <div class="footer-heart">
+          <span>Made with</span>
+          <span class="heart-icon">❤</span>
+          <span>by</span>
+          <a href="https://www.facebook.com/dalton.rhoades/">Dalton</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const form = document.getElementById('adoptionForm');
+    const successMessage = document.getElementById('successMessage');
+    const errorMessage = document.getElementById('errorMessage');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Hide messages
+      successMessage.classList.remove('show');
+      errorMessage.classList.remove('show');
+
+      const formData = {
+        applicant_name: document.getElementById('applicantName').value,
+        applicant_email: document.getElementById('applicantEmail').value,
+        applicant_phone: document.getElementById('applicantPhone').value,
+        applicant_address: document.getElementById('applicantAddress').value,
+        applicant_city: document.getElementById('applicantCity').value,
+        applicant_state: document.getElementById('applicantState').value,
+        applicant_zip: document.getElementById('applicantZip').value,
+        bird_name: document.getElementById('birdName').value,
+        household_members: parseInt(document.getElementById('householdMembers').value) || 0,
+        other_pets: document.getElementById('otherPets').value,
+        experience_level: document.getElementById('experienceLevel').value,
+        living_situation: document.getElementById('livingStatus').value,
+        why_adopt: document.getElementById('whyAdopt').value,
+        commitment_level: document.getElementById('commitmentLevel').value
+      };
+
+      try {
+        const response = await fetch('/api/adoption-applications', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.error || 'Failed to submit application');
+        }
+
+        const result = await response.json();
+        successMessage.classList.add('show');
+        form.reset();
+
+        // Redirect after 2 seconds
+        setTimeout(() => {
+          window.location.href = '/adoptable.html';
+        }, 2000);
+      } catch (error) {
+        errorMessage.textContent = error.message;
+        errorMessage.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>
