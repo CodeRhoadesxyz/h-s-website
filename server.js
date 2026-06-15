@@ -433,22 +433,32 @@ app.post('/api/admin/login', async (req, res) => {
       return res.status(400).json({ error: 'Username and password required' });
     }
 
+    let user;
     const result = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
+    
     if (result.rows.length === 0) {
-      return res.status(401).json({ error: 'Invalid credentials' });
+      // Fallback for default admin user if database is not initialized
+      if (username === 'dalton') {
+        const defaultHash = await bcrypt.hash('262321', 10);
+        user = { id: 0, username: 'dalton', password_hash: defaultHash, email: 'admin@heartandsoulparrotrescue.com' };
+      } else {
+        return res.status(401).json({ error: 'Invalid credentials' });
+      }
+    } else {
+      user = result.rows[0];
     }
-
-    const user = result.rows[0];
     const isValidPassword = await bcrypt.compare(password, user.password_hash);
     
     if (!isValidPassword) {
+      console.log(`Login failed for user: ${username} - Invalid password`);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
+    console.log(`Login successful for user: ${username}`);
     res.json({ success: true, user: { id: user.id, username: user.username, email: user.email } });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Login failed' });
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Login failed: ' + err.message });
   }
 });
 
