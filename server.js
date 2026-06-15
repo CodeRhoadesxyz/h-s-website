@@ -424,7 +424,14 @@ app.post('/api/birds/import-petfinder', async (req, res) => {
 
 const bcrypt = require('bcryptjs');
 
-// Admin login
+// Hardcoded Admin Users
+const HARDCODED_USERS = [
+  { id: 1, username: 'dalton', password: '262321', email: 'dalton@heartandsoulparrotrescue.com' },
+  { id: 2, username: 'sherry', password: 'admin1256', email: 'sherry@heartandsoulparrotrescue.com' },
+  { id: 3, username: 'michelle', password: '77848', email: 'michelle@heartandsoulparrotrescue.com' }
+];
+
+// Admin login (Hardcoded)
 app.post('/api/admin/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -433,24 +440,10 @@ app.post('/api/admin/login', async (req, res) => {
       return res.status(400).json({ error: 'Username and password required' });
     }
 
-    let user;
-    const result = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
+    const user = HARDCODED_USERS.find(u => u.username === username && u.password === password);
     
-    if (result.rows.length === 0) {
-      // Fallback for default admin user if database is not initialized
-      if (username === 'dalton') {
-        const defaultHash = await bcrypt.hash('262321', 10);
-        user = { id: 0, username: 'dalton', password_hash: defaultHash, email: 'admin@heartandsoulparrotrescue.com' };
-      } else {
-        return res.status(401).json({ error: 'Invalid credentials' });
-      }
-    } else {
-      user = result.rows[0];
-    }
-    const isValidPassword = await bcrypt.compare(password, user.password_hash);
-    
-    if (!isValidPassword) {
-      console.log(`Login failed for user: ${username} - Invalid password`);
+    if (!user) {
+      console.log(`Login failed for user: ${username}`);
       return res.status(401).json({ error: 'Invalid credentials' });
     }
 
@@ -458,45 +451,23 @@ app.post('/api/admin/login', async (req, res) => {
     res.json({ success: true, user: { id: user.id, username: user.username, email: user.email } });
   } catch (err) {
     console.error('Login error:', err);
-    res.status(500).json({ error: 'Login failed: ' + err.message });
+    res.status(500).json({ error: 'Login failed' });
   }
 });
 
-// Get all admin users (admin only)
+// Get all admin users (Returns hardcoded users)
 app.get('/api/admin/users', async (req, res) => {
   try {
-    const result = await pool.query('SELECT id, username, email, created_at FROM admin_users');
-    res.json(result.rows);
+    const users = HARDCODED_USERS.map(({ id, username, email }) => ({ id, username, email, created_at: new Date() }));
+    res.json(users);
   } catch (err) {
-    console.error(err);
     res.status(500).json({ error: 'Failed to fetch admin users' });
   }
 });
 
-// Create new admin user (admin only)
+// Create new admin user (Disabled for hardcoded mode)
 app.post('/api/admin/users', async (req, res) => {
-  try {
-    const { username, password, email } = req.body;
-    
-    if (!username || !password) {
-      return res.status(400).json({ error: 'Username and password required' });
-    }
-
-    const passwordHash = await bcrypt.hash(password, 10);
-    const result = await pool.query(
-      'INSERT INTO admin_users (username, password_hash, email) VALUES ($1, $2, $3) RETURNING id, username, email',
-      [username, passwordHash, email || null]
-    );
-    
-    res.status(201).json(result.rows[0]);
-  } catch (err) {
-    console.error(err);
-    if (err.code === '23505') {
-      res.status(400).json({ error: 'Username already exists' });
-    } else {
-      res.status(500).json({ error: 'Failed to create admin user' });
-    }
-  }
+  res.status(403).json({ error: 'User creation is disabled in hardcoded mode' });
 });
 
 // ============================================================================
