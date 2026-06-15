@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Heart & Soul Parrot Rescue</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <!-- Admin Panel Container -->
+  <div class="admin-container">
+    <!-- Sidebar Navigation -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-header">
+        <h1>🦜 Admin</h1>
+        <p>Heart & Soul Rescue</p>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#dashboard" class="nav-link active" data-tab="dashboard">
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Dashboard</span>
+        </a>
+        <a href="#birds" class="nav-link" data-tab="birds">
+          <span class="nav-icon">🦜</span>
+          <span class="nav-text">Adoptable Birds</span>
+        </a>
+        <a href="#events" class="nav-link" data-tab="events">
+          <span class="nav-icon">📅</span>
+          <span class="nav-text">Events</span>
+        </a>
+        <a href="#messages" class="nav-link" data-tab="messages">
+          <span class="nav-icon">💬</span>
+          <span class="nav-text">Messages</span>
+        </a>
+        <a href="index.html" class="nav-link back-link">
+          <span class="nav-icon">← </span>
+          <span class="nav-text">Back to Site</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>v1.0.0</p>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+      <!-- Header -->
+      <header class="admin-header">
+        <h2 id="page-title">Dashboard</h2>
+        <div class="header-actions">
+          <button class="btn-theme-toggle" id="themeToggle">🌙</button>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <div class="admin-content">
+        <!-- Dashboard Tab -->
+        <section id="dashboard" class="tab-content active">
+          <div class="dashboard-grid">
+            <div class="stat-card">
+              <div class="stat-icon">🦜</div>
+              <div class="stat-info">
+                <p class="stat-label">Adoptable Birds</p>
+                <p class="stat-number" id="bird-count">0</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">📅</div>
+              <div class="stat-info">
+                <p class="stat-label">Upcoming Events</p>
+                <p class="stat-number" id="event-count">0</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">💬</div>
+              <div class="stat-info">
+                <p class="stat-label">Messages</p>
+                <p class="stat-number" id="message-count">0</p>
+              </div>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-icon">✅</div>
+              <div class="stat-info">
+                <p class="stat-label">API Status</p>
+                <p class="stat-number" id="api-status">Checking...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="dashboard-section">
+            <h3>Quick Actions</h3>
+            <div class="action-buttons">
+              <button class="btn btn-primary" onclick="switchTab('birds')">Add New Bird</button>
+              <button class="btn btn-primary" onclick="switchTab('events')">Create Event</button>
+              <button class="btn btn-secondary" onclick="switchTab('messages')">View Messages</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Birds Management Tab -->
+        <section id="birds" class="tab-content">
+          <div class="section-header">
+            <h3>Manage Adoptable Birds</h3>
+            <button class="btn btn-primary" id="addBirdBtn">+ Add New Bird</button>
+          </div>
+
+          <!-- Add/Edit Bird Form -->
+          <div id="birdForm" class="form-container" style="display: none;">
+            <h4 id="formTitle">Add New Bird</h4>
+            <form id="birdFormElement">
+              <div class="form-group">
+                <label for="birdName">Name *</label>
+                <input type="text" id="birdName" required placeholder="e.g., Polly">
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="birdSpecies">Species *</label>
+                  <input type="text" id="birdSpecies" required placeholder="e.g., Blue and Gold Macaw">
+                </div>
+                <div class="form-group">
+                  <label for="birdAge">Age</label>
+                  <input type="text" id="birdAge" placeholder="e.g., 5 years">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="birdDescription">Description</label>
+                <textarea id="birdDescription" placeholder="Tell us about this bird..." rows="4"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="birdImageUrl">Image URL</label>
+                <input type="url" id="birdImageUrl" placeholder="https://example.com/image.jpg">
+              </div>
+
+              <div class="form-group">
+                <label for="birdStatus">Status</label>
+                <select id="birdStatus">
+                  <option value="available">Available</option>
+                  <option value="pending">Pending</option>
+                  <option value="adopted">Adopted</option>
+                </select>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Bird</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelBirdForm()">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Birds List -->
+          <div id="birdsList" class="items-list">
+            <p class="loading">Loading birds...</p>
+          </div>
+        </section>
+
+        <!-- Events Management Tab -->
+        <section id="events" class="tab-content">
+          <div class="section-header">
+            <h3>Manage Events</h3>
+            <button class="btn btn-primary" id="addEventBtn">+ Create Event</button>
+          </div>
+
+          <!-- Add/Edit Event Form -->
+          <div id="eventForm" class="form-container" style="display: none;">
+            <h4 id="eventFormTitle">Create New Event</h4>
+            <form id="eventFormElement">
+              <div class="form-group">
+                <label for="eventTitle">Event Title *</label>
+                <input type="text" id="eventTitle" required placeholder="e.g., Adoption Day">
+              </div>
+
+              <div class="form-group">
+                <label for="eventDescription">Description</label>
+                <textarea id="eventDescription" placeholder="Event details..." rows="4"></textarea>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="eventDate">Date & Time *</label>
+                  <input type="datetime-local" id="eventDate" required>
+                </div>
+                <div class="form-group">
+                  <label for="eventLocation">Location</label>
+                  <input type="text" id="eventLocation" placeholder="e.g., Community Center">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Save Event</button>
+                <button type="button" class="btn btn-secondary" onclick="cancelEventForm()">Cancel</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Events List -->
+          <div id="eventsList" class="items-list">
+            <p class="loading">Loading events...</p>
+          </div>
+        </section>
+
+        <!-- Messages Tab -->
+        <section id="messages" class="tab-content">
+          <div class="section-header">
+            <h3>Contact Messages</h3>
+            <p class="section-subtitle">Messages from your website visitors</p>
+          </div>
+
+          <!-- Messages List -->
+          <div id="messagesList" class="items-list">
+            <p class="loading">Loading messages...</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal for viewing full messages -->
+  <div id="messageModal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Message Details</h3>
+        <button class="modal-close" onclick="closeMessageModal()">&times;</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Message content will be inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>
