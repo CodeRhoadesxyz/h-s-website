@@ -523,3 +523,138 @@ window.showCreateUserForm = showCreateUserForm;
 window.closeModal = closeModal;
 window.switchTab = switchTab;
 window.logout = logout;
+
+// ============================================================================
+// EVENTS MANAGEMENT
+// ============================================================================
+
+async function loadEvents() {
+  try {
+    const response = await fetch(`${API_BASE_URL}/events`);
+    if (!response.ok) throw new Error('Failed to load events');
+    
+    events = await response.json();
+    renderEvents();
+  } catch (error) {
+    console.error('Error loading events:', error);
+  }
+}
+
+function renderEvents() {
+  const container = document.getElementById('eventsList');
+  if (!container) return;
+
+  if (events.length === 0) {
+    container.innerHTML = '<p class="loading">No events yet</p>';
+    return;
+  }
+
+  container.innerHTML = events.map(event => `
+    <div class="item-card">
+      <div class="item-header">
+        <h4>${event.title}</h4>
+        <div class="item-actions">
+          <button class="btn btn-small btn-secondary" onclick="editEvent(${event.id})">Edit</button>
+          <button class="btn btn-small btn-danger" onclick="deleteEvent(${event.id})">Delete</button>
+        </div>
+      </div>
+      <div class="item-details">
+        <p><strong>Date:</strong> ${new Date(event.event_date).toLocaleString('en-US', { timeZone: 'America/New_York' })} (EST)</p>
+        <p><strong>Location:</strong> ${event.location || 'N/A'}</p>
+        <p>${event.description || ''}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+async function handleEventSubmit(e) {
+  e.preventDefault();
+  
+  const eventData = {
+    title: document.getElementById('eventTitle').value,
+    description: document.getElementById('eventDescription').value,
+    event_date: document.getElementById('eventDate').value,
+    location: document.getElementById('eventLocation').value
+  };
+
+  const url = currentEventId ? `${API_BASE_URL}/events/${currentEventId}` : `${API_BASE_URL}/events`;
+  const method = currentEventId ? 'PUT' : 'POST';
+
+  try {
+    const response = await fetch(url, {
+      method: method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(eventData)
+    });
+
+    if (!response.ok) throw new Error('Failed to save event');
+    
+    alert('Event saved successfully!');
+    document.getElementById('eventForm').style.display = 'none';
+    loadEvents();
+  } catch (error) {
+    console.error('Error saving event:', error);
+    alert('Failed to save event');
+  }
+}
+
+function editEvent(id) {
+  const event = events.find(e => e.id === id);
+  if (!event) return;
+
+  currentEventId = id;
+  document.getElementById('eventTitle').value = event.title;
+  document.getElementById('eventDescription').value = event.description || '';
+  
+  // Format date for datetime-local input
+  const date = new Date(event.event_date);
+  const formattedDate = date.toISOString().slice(0, 16);
+  document.getElementById('eventDate').value = formattedDate;
+  
+  document.getElementById('eventLocation').value = event.location || '';
+  
+  document.getElementById('eventForm').style.display = 'block';
+  document.getElementById('eventFormTitle').textContent = 'Edit Event';
+}
+
+async function deleteEvent(id) {
+  if (!confirm('Are you sure you want to delete this event?')) return;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/events/${id}`, {
+      method: 'DELETE'
+    });
+
+    if (!response.ok) throw new Error('Failed to delete event');
+    
+    alert('Event deleted successfully!');
+    loadEvents();
+  } catch (error) {
+    console.error('Error deleting event:', error);
+    alert('Failed to delete event');
+  }
+}
+
+function resetEventForm() {
+  document.getElementById('eventFormElement').reset();
+  currentEventId = null;
+}
+
+function cancelEventForm() {
+  document.getElementById('eventForm').style.display = 'none';
+  resetEventForm();
+}
+
+// Export functions for inline onclick handlers
+window.viewSurrenderDetail = viewSurrenderDetail;
+window.updateSurrenderStatus = updateSurrenderStatus;
+window.viewAdoptionDetail = viewAdoptionDetail;
+window.updateAdoptionStatus = updateAdoptionStatus;
+window.showCreateUserForm = showCreateUserForm;
+window.closeModal = closeModal;
+window.switchTab = switchTab;
+window.logout = logout;
+window.editEvent = editEvent;
+window.deleteEvent = deleteEvent;
+window.cancelEventForm = cancelEventForm;
+window.handleEventSubmit = handleEventSubmit;

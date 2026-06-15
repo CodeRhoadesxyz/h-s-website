@@ -149,16 +149,18 @@ app.get('/api/contact-messages', async (req, res) => {
 // EVENTS ENDPOINT
 // ============================================================================
 
+// Get all events (Ordered by date)
 app.get('/api/events', async (req, res) => {
   try {
-    const result = await pool.query('SELECT * FROM events WHERE event_date >= NOW() ORDER BY event_date ASC');
+    const result = await pool.query('SELECT * FROM events ORDER BY event_date ASC');
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch events' });
+    console.error('Database error in /api/events:', err.message);
+    res.json([]);
   }
 });
 
+// Create new event
 app.post('/api/events', async (req, res) => {
   try {
     const { title, description, event_date, location } = req.body;
@@ -176,6 +178,45 @@ app.post('/api/events', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create event' });
+  }
+});
+
+// Update event
+app.put('/api/events/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, description, event_date, location } = req.body;
+
+    const result = await pool.query(
+      'UPDATE events SET title = $1, description = $2, event_date = $3, location = $4, updated_at = NOW() WHERE id = $5 RETURNING *',
+      [title, description, event_date, location, id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update event' });
+  }
+});
+
+// Delete event
+app.delete('/api/events/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query('DELETE FROM events WHERE id = $1 RETURNING *', [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Event not found' });
+    }
+
+    res.json({ message: 'Event deleted successfully' });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to delete event' });
   }
 });
 
