@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart & Soul Parrot Rescue - Adopted</title>
+  <link rel="stylesheet" href="css/styles.css?v=2.0">
+  <style>
+    /* Petfinder Widget Styling */
+    .petfinder-widget-wrapper {
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      margin: 2rem 0;
+      overflow: hidden;
+    }
+
+    .petfinder-widget-wrapper iframe {
+      border: none !important;
+      border-radius: var(--radius-md) !important;
+      background-color: var(--card) !important;
+    }
+
+    /* Override Petfinder widget colors for dark theme */
+    :root:not([data-theme="light"]) .petfinder-widget-wrapper {
+      background-color: #1f4540;
+    }
+
+    /* Light theme adjustments */
+    :root[data-theme="light"] .petfinder-widget-wrapper {
+      background-color: #ffffff;
+    }
+
+    /* Ensure widget content is readable */
+    .widget-container {
+      background-color: var(--card);
+      color: var(--card-foreground);
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Parrot Background -->
+  <div class="parrot-animation-container"></div>
+  <!-- HEADER -->
+  <header>
+    <div class="container">
+      <div class="header-container">
+        <a href="index.html" class="logo">
+          <div class="logo-image">
+            <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+          </div>
+          <span class="logo-text">Heart & Soul Parrot Rescue</span>
+        </a>
+
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="adoptable.html">Adoptable</a>
+          <a href="adopted.html">Adopted</a>
+          <a href="team.html">Team</a>
+          <a href="events.html">Events</a>
+          <a href="prices.html">Pricing</a>
+          <a href="surrender.html">Surrender</a>
+          <a href="vets.html">Vets</a>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+            <span class="theme-icon"></span>
+          </button>
+          <a href="donate.html" class="donate-btn">Donate</a>
+        </div>
+
+        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-menu"><button class="mobile-menu-close-removed" aria-label="Close menu">×</button>
+    <div class="mobile-menu-header">
+      <button class="mobile-theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon"></span>
+      </button>
+      <button class="mobile-menu-close" aria-label="Close menu">u00d7</button>
+    </div>
+    <nav class="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="adoptable.html">Adoptable</a>
+      <a href="adopted.html">Adopted</a>
+      <a href="team.html">Team</a>
+      <a href="events.html">Events</a>
+      <a href="prices.html">Pricing</a>
+      <a href="education.html">Education</a>
+      <a href="surrender.html">Surrender</a>
+      <a href="vets.html">Vets</a>
+    </nav>
+    <div class="mobile-menu-divider"></div>
+    <a href="donate.html" class="mobile-donate-btn">Donate Now</a>
+  </div>
+  <div class="mobile-menu-overlay"></div>
+
+  <main>
+    <!-- HEADER SECTION -->
+    <section style="background-color: rgba(107, 155, 106, 0.05); padding: 4rem 0 6rem;">
+      <div class="container" style="text-align: center; max-width: 56rem;">
+        <h1 class="page-title">Success Stories</h1>
+        <p class="page-subtitle">Meet the birds who found their forever homes and the families who gave them a second chance.</p>
+      </div>
+    </section>
+
+    <!-- PETFINDER WIDGET SECTION -->
+    <section style="padding: 4rem 0;">
+      <div class="container">
+<!-- Pet List Widget - Start -->
+<script src="https://www.petfinder.com/pet-scroller.bundle.js"></script>
+<pet-scroller
+    s3Url="https://dbw3zep4prcju.cloudfront.net/"
+    apiBase="https://psl.petfinder.com/graphql"
+    organization='["PA1093"]'
+    status="adopted"
+    petfinderUrl="https://www.petfinder.com/"
+    type='["bird"]'
+    hideBreed="false"
+    limit="48"
+    petListTitle="Our past flock, onto their new perches!">
+</pet-scroller>
+<!-- Pet List Widget - End -->
+    </section>
+
+    <!-- NEED MORE INFO TO FINISH, WOULD RATHER WAIT TILL I HAVE UPDATED MORE REALISTIC INFO
+    <section style="padding: 4rem 0;">
+      <div class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">Featured Success Stories</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3>Kiwi's Journey</h3>
+            <p><strong>Species:</strong> Green-Winged Macaw</p>
+            <p><strong>Age at Adoption:</strong> 8 years</p>
+            <p style="margin-top: 1rem;">Kiwi came to us after his previous owner passed away. He was shy and withdrawn at first, but with patience and love, he blossomed. Now he sings every morning and has become the joy of his new family's life.</p>
+          </div>
+
+          <div class="card">
+            <h3>Luna's New Beginning</h3>
+            <p><strong>Species:</strong> African Grey Parrot</p>
+            <p><strong>Age at Adoption:</strong> 12 years</p>
+            <p style="margin-top: 1rem;">Luna was surrendered because her previous owner developed severe allergies. She was depressed and barely spoke. After months of rehabilitation, Luna regained her confidence and vocabulary.</p>
+          </div>
+
+          <div class="card">
+            <h3>Sunny's Transformation</h3>
+            <p><strong>Species:</strong> Sulphur-Crested Cockatoo</p>
+            <p><strong>Age at Adoption:</strong> 5 years</p>
+            <p style="margin-top: 1rem;">Sunny was aggressive and destructive when he arrived. Through behavioral training and consistent care, he learned to trust again. Today, he's a loving, playful companion.</p>
+          </div>
+
+          <div class="card">
+            <h3>Charlie's Second Chance</h3>
+            <p><strong>Species:</strong> Amazon Parrot</p>
+            <p><strong>Age at Adoption:</strong> 15 years</p>
+            <p style="margin-top: 1rem;">Charlie was neglected and malnourished when he came to us. After veterinary care and proper nutrition, he regained his health and vibrant personality.</p>
+          </div>
+
+          <div class="card">
+            <h3>Pepper's Perfect Match</h3>
+            <p><strong>Species:</strong> Green-Winged Conure</p>
+            <p><strong>Age at Adoption:</strong> 3 years</p>
+            <p style="margin-top: 1rem;">Pepper was surrendered by a family who didn't realize how much attention she needed. She found her perfect match with a retired teacher who has time for her playful antics.</p>
+          </div>
+
+          <div class="card">
+            <h3>Mango's Happy Home</h3>
+            <p><strong>Species:</strong> Cockatiel</p>
+            <p><strong>Age at Adoption:</strong> 2 years</p>
+            <p style="margin-top: 1rem;">Mango was adopted by a young family looking for their first bird. He's gentle, affectionate, and perfect for teaching the kids about responsibility.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section style="background-color: rgba(45, 80, 80, 0.3); padding: 4rem 0;">
+      <div class="container">
+        <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;">What Our Adopters Say</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <p style="font-style: italic; margin-bottom: 1rem; color: var(--muted-foreground);">"The team at Heart & Soul Parrot Rescue was incredibly supportive throughout the adoption process. They made sure we were the right fit for our bird."</p>
+            <p><strong>- Sarah M., Cockatiel Adopter</strong></p>
+          </div>
+
+          <div class="card">
+            <p style="font-style: italic; margin-bottom: 1rem; color: var(--muted-foreground);">"We were nervous about adopting a large parrot, but the rescue's education and support gave us confidence. Our macaw is thriving!"</p>
+            <p><strong>- James & Linda K., Macaw Adopters</strong></p>
+          </div>
+
+          <div class="card">
+            <p style="font-style: italic; margin-bottom: 1rem; color: var(--muted-foreground);">"The rescue didn't just hand us a birdthey made sure it was the right match. Years later, we still reach out for advice."</p>
+            <p><strong>- Michael T., African Grey Adopter</strong></p>
+          </div>
+        </div>
+      </div>
+    </section>-->
+
+    <!-- CTA SECTION -->
+    <section style="padding: 4rem 0; text-align: center;">
+      <div class="container">
+        <h2 class="section-title" style="margin-bottom: 1.5rem;">Ready to Write Your Own Success Story?</h2>
+        <p class="section-subtitle" style="max-width: 32rem; margin: 0 auto 2rem;">
+          Browse our available birds and find your perfect feathered companion today.
+        </p>
+        <a href="adoptable.html" class="btn btn-primary">View Adoptable Birds</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <div class="footer-logo-image">
+            <img src="images/logo2.png" alt="Heart and Soul Parrot Rescue">
+            </div>
+            <span class="footer-logo-text">Heart & Soul</span>
+          </div>
+          <p class="footer-description">
+            Sherry, Jerry, and our volunteers put their whole heart and soul into the Parrot rescue. We want you to feel part of our family. We are here for the birds.
+          </p>
+          <div class="footer-socials">
+            <a href="https://www.facebook.com/p/Heart-and-Soul-Parrot-Rescue-100082180182198/" target="_blank" rel="noopener noreferrer" class="footer-social-link facebook" aria-label="Facebook">f</a>
+            <a href="https://www.instagram.com/heartandsoulparrotrescue/" target="_blank" rel="noopener noreferrer" class="footer-social-link instagram" aria-label="Instagram">??</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <div class="footer-links">
+            <a href="adoptable.html">Adoptable Birds</a>
+            <a href="adopted.html">Success Stories</a>
+            <a href="education.html">Education</a>
+            <a href="events.html">Events</a>
+            <a href="team.html">Our Team</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <div class="footer-links">
+            <a href="vets.html">Veterinary Partners</a>
+            <a href="prices.html">Services & Pricing</a>
+            <a href="surrender.html">Surrender a Bird</a>
+            <a href="donate.html">Donate</a>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <h3>Contact</h3>
+          <div class="footer-links">
+            <a href="mailto:heartandsoulparrots@gmail.com">heartandsoulparrots@gmail.com</a>
+            <a href="tel:412-748-1288">412-748-1288</a>
+            <a href="surrender.html">Surrender a Bird</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p> 2026 Heart and Soul Parrot Rescue.</p>
+        <div class="footer-heart">
+          <span>Made with</span>
+          <span class="heart-icon">?</span>
+          <span>by Dalton</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
