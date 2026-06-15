@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
   initializeNavigation();
   initializeScrollEffects();
   initializeMobileMenu();
-  initializeParrotAnimation();
 });
 
 /* ============================================================================
@@ -162,60 +161,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* ============================================================================
-   PARROT ANIMATION
-   ============================================================================ */
 
-function initializeParrotAnimation() {
-  const container = document.querySelector('.parrot-animation-container');
-  if (!container) return;
-
-  const parrots = [
-    { name: 'blue_gold_macaw', src: 'images/parrots/blue_gold_macaw.jpg' },
-    { name: 'scarlet_macaw', src: 'images/parrots/scarlet_macaw.webp' },
-    { name: 'military_macaw', src: 'images/parrots/military_macaw.jpg' },
-    { name: 'cockatoo', src: 'images/parrots/cockatoo.webp' }
-  ];
-
-  function createParrot() {
-    const parrot = parrots[Math.floor(Math.random() * parrots.length)];
-    const img = document.createElement('img');
-    img.src = parrot.src;
-    img.className = 'flying-parrot';
-    
-    // Randomize starting vertical position
-    const top = Math.random() * 80 + 10;
-    img.style.top = `${top}%`;
-    
-    // Randomize size
-    const size = Math.random() * 100 + 100;
-    img.style.width = `${size}px`;
-    
-    // Randomize speed
-    const duration = Math.random() * 10 + 15;
-    img.style.animationDuration = `${duration}s`;
-    
-    // Randomize direction
-    const direction = Math.random() > 0.5 ? 'flyAcross' : 'flyBack';
-    img.style.animationName = direction;
-    img.style.animationTimingFunction = 'linear';
-    img.style.animationIterationCount = '1';
-
-    container.appendChild(img);
-
-    setTimeout(() => {
-      img.remove();
-    }, duration * 1000);
-  }
-
-  // Create initial parrots
-  for (let i = 0; i < 3; i++) {
-    setTimeout(createParrot, Math.random() * 5000);
-  }
-
-  // Continuously create parrots
-  setInterval(createParrot, 8000);
-}
 
 /* ============================================================================
    UTILITY FUNCTIONS
