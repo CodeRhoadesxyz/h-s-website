@@ -14,3 +14,6 @@ build/
 *.swp
 *.swo
 *~
+ADMIN_PANEL_GUIDE.md
+RAILWAY_DEPLOYMENT.md
+*.md
